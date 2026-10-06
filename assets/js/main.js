@@ -7,9 +7,15 @@
   // Letztes Wort an das vorletzte binden, damit nie ein Wort allein in der Zeile steht
   function nb(t) { return String(t).replace(/ (\S+)$/, " $1"); }
 
+  /* Kopf: transparent über dem Fotokopf, weiß nach dem Scrollen */
+  var kopf = $(".kopf");
+  function kopfStand() { kopf.classList.toggle("oben", !!$(".hero") && window.scrollY < 40 && !kopf.classList.contains("menue-auf")); }
+  window.addEventListener("scroll", kopfStand, { passive: true });
+  kopfStand();
+
   /* Menü */
   var knopf = $(".menue-knopf"), nav = $("#nav");
-  function menue(auf) { knopf.setAttribute("aria-expanded", String(auf)); nav.classList.toggle("offen", auf); }
+  function menue(auf) { knopf.setAttribute("aria-expanded", String(auf)); nav.classList.toggle("offen", auf); kopf.classList.toggle("menue-auf", auf); kopfStand(); }
   if (knopf) knopf.addEventListener("click", function () { menue(knopf.getAttribute("aria-expanded") !== "true"); });
   $$(".nav-gruppe > button").forEach(function (b) {
     b.addEventListener("click", function () {

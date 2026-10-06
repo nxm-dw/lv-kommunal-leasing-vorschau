@@ -10,8 +10,8 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#57585C">
 <script src="assets/js/js-an.js"></script>
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/archivo-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/instrument-sans-400-700-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/chivo-mono-400-500-latin.woff2">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/demo-pille.css">
@@ -21,26 +21,21 @@
 <a class="skip" href="#inhalt">Zum Inhalt&nbsp;springen</a>
 <header class="kopf">
   <div class="wrap kopf-innen">
-    <a class="logo" href="index.html" aria-label="LV Kommunal, zur Startseite"><img src="assets/img/logo.svg" alt="LV Kommunal" width="200" height="20"></a>
+    <a class="logo" href="index.html" aria-label="LV Kommunal, zur Startseite"><img class="logo-dunkel" src="assets/img/logo.svg" alt="LV Kommunal" width="190" height="19"><img class="logo-hell" src="assets/img/logo-hell.svg" alt="" width="190" height="19"></a>
     <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="nav"><span></span><b class="sr">Menü</b></button>
-    <nav class="nav" id="nav" aria-label="Hauptnavigation">
-      <ul>
-        <li class="nav-gruppe"><button type="button" aria-expanded="false">Leasing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-          <ul class="unter"><li><a href="leasing.html">Leasing mit LV&nbsp;Kommunal</a></li><li><a href="vorteile-kaeufer.html">Vorteile für&nbsp;Käufer</a></li><li><a href="vorteile-haendler.html">Vorteile für&nbsp;Händler</a></li></ul></li>
-        <li><a href="versicherungen.html">Versicherungen</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="ueber-uns.html">Über&nbsp;uns</a></li><li><a href="kontakt.html">Kontakt</a></li>
-      </ul>
-    </nav>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation"><ul><li><a href="kommunalleasing.html">Kommunalleasing</a></li><li class="nav-gruppe"><button type="button" aria-expanded="false">Leasing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><ul class="unter"><li><a href="leasing.html">Leasing mit LV&nbsp;Kommunal</a></li><li><a href="vorteile-kaeufer.html">Vorteile für&nbsp;Käufer</a></li><li><a href="vorteile-haendler.html">Vorteile für&nbsp;Händler</a></li></ul></li><li><a href="versicherungen.html">Versicherungen</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="ueber-uns.html">Über&nbsp;uns</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
     <!-- Login: ab 01.11.2026 externe Seite, Adresse in src/seiten.py (LOGIN) ändern -->
     <a class="login" href="https://www.lv-kommunal.de/authentifizierung/authentifizierung" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Login</span><svg class="extern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg><span class="sr">(öffnet in neuem&nbsp;Tab)</span></a>
   </div>
 </header>
 <main id="inhalt">
-<section class="buehne flaeche-grau">
+<section class="hero">
+  
   <div class="wrap">
-    <nav aria-label="Brotkrümel"><ol class="brotkrumen"><li><a href="index.html">Startseite</a></li><li aria-current="page">Impressum</li></ol></nav>
-    <div class="buehne-raster"><h1 class="t-gross">Impressum</h1><p class="lead">Angaben zum Anbieter dieser&nbsp;Website.</p></div>
+    <nav aria-label="Brotkrümel"><ol class="brotkrumen"><li><a href="index.html">Start</a></li><li aria-current="page">Impressum</li></ol></nav>
+    <div class="hero-text"><h1 class="d-l">Impressum</h1><p class="lead">Angaben zum Anbieter dieser&nbsp;Website.</p></div>
+    <div class="strasse" aria-hidden="true"><svg class="illu" viewBox="0 60 5928 400" aria-hidden="true"><use href="assets/img/illustration.svg#ill"/></svg></div>
   </div>
-  <div class="wrap"><div class="strasse" aria-hidden="true"><div class="strasse-spur"><svg class="illu" viewBox="0 60 5928 400"><use href="assets/img/illustration.svg#ill"/></svg></div></div></div>
 </section>
 <section class="sek" aria-label="Impressum">
   <div class="wrap text">
@@ -59,17 +54,19 @@
 
 </main>
 <footer class="fuss">
+  <div class="fuss-band"><div class="wrap fuss-band-innen"><span><b>Kommunalleasing, Finanzierung und Versicherung</b></span><span>Sitz <b>Taunusstein</b></span><span>Tätig <b>bundesweit</b></span><span>Laufzeiten <b>6 bis 84 Monate</b></span></div></div>
   <div class="wrap fuss-raster">
     <div>
+      <img src="assets/img/logo-hell.svg" alt="LV Kommunal" width="190" height="19" loading="lazy">
       <a class="fuss-tel" href="tel:+4961286059700">06128&nbsp;60597-0</a>
       <p class="fuss-adresse">LV Kommunal Leasing GmbH<br>Kurt-Schumacher-Straße 36, 65232 Taunusstein<br><a href="mailto:kontakt@lv-kommunal.de">kontakt@lv-kommunal.de</a></p>
+      <div class="fuss-strasse" aria-hidden="true"><svg class="illu" viewBox="0 60 5928 400" aria-hidden="true"><use href="assets/img/illustration.svg#ill"/></svg></div>
     </div>
-    <div><h2>Leasing</h2><ul><li><a href="leasing.html">Leasing mit LV&nbsp;Kommunal</a></li><li><a href="vorteile-kaeufer.html">Vorteile für&nbsp;Käufer</a></li><li><a href="vorteile-haendler.html">Vorteile für&nbsp;Händler</a></li></ul></div>
-    <div><h2>Service</h2><ul><li><a href="versicherungen.html">Versicherungen</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="ueber-uns.html">Über&nbsp;uns</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></div>
-    <div><h2>Rechtliches</h2><ul><li><a href="impressum.html">Impressum</a></li><li><a href="impressum.html#datenschutz">Datenschutz</a></li><li><a href="https://www.lv-kommunal.de/authentifizierung/authentifizierung" target="_blank" rel="noopener">Login <span class="sr">(öffnet in neuem&nbsp;Tab)</span></a></li></ul></div>
+    <div><h2>Leasing</h2><ul><li><a href="kommunalleasing.html">Kommunalleasing</a></li><li><a href="leasing.html">Leasing mit LV&nbsp;Kommunal</a></li><li><a href="vorteile-kaeufer.html">Vorteile für&nbsp;Käufer</a></li><li><a href="vorteile-haendler.html">Vorteile für&nbsp;Händler</a></li></ul></div>
+    <div><h2>Service</h2><ul><li><a href="versicherungen.html">Versicherungen</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="ueber-uns.html">Über&nbsp;uns</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="https://www.lv-kommunal.de/authentifizierung/authentifizierung" target="_blank" rel="noopener">Login <span class="sr">(öffnet in neuem&nbsp;Tab)</span></a></li></ul></div>
+    <div><h2>Rechtliches</h2><ul><li><a href="impressum.html">Impressum</a></li><li><a href="impressum.html#datenschutz">Datenschutz</a></li></ul><p class="notiz">Amtsgericht Wiesbaden HRB&nbsp;33594</p></div>
   </div>
-  <div class="wrap fuss-marke"><img src="assets/img/logo-hell.svg" alt="LV Kommunal" width="1240" height="125" loading="lazy"></div>
-  <div class="fuss-unten"><div class="wrap fuss-unten-innen"><span>© <span id="jahr">2026</span> LV Kommunal Leasing&nbsp;GmbH</span><span>Wir helfen Ihren Maschinen auf die&nbsp;Straße.</span></div></div>
+  <div class="wrap fuss-unten"><span>© <span id="jahr">2026</span> LV Kommunal Leasing&nbsp;GmbH</span><span>Wir helfen Ihren Maschinen auf die&nbsp;Straße.</span></div>
 </footer>
 <a class="nxm-demo" href="https://nexas-media.de" target="_blank" rel="noopener noreferrer"><span class="nxm-demo__text">Demo&nbsp;by</span><img class="nxm-demo__logo" src="assets/img/nexas-media-logo-weiss.svg" alt="NEXAS Media" width="75" height="24" loading="lazy" decoding="async"></a>
 </body>
