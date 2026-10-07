@@ -176,7 +176,7 @@ h2.d-l, h2.d-m { margin-bottom: 1.1rem; }
 .hero::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(90deg, rgba(70, 71, 75, .96) 0%, rgba(70, 71, 75, .86) 38%, rgba(70, 71, 75, .45) 70%, rgba(70, 71, 75, .55) 100%),
+    linear-gradient(90deg, rgba(70, 71, 75, .96) 0%, rgba(70, 71, 75, .9) 45%, rgba(70, 71, 75, .5) 75%, rgba(70, 71, 75, .55) 100%),
     linear-gradient(0deg, rgba(70, 71, 75, .92) 0%, rgba(70, 71, 75, 0) 40%),
     linear-gradient(180deg, rgba(70, 71, 75, .6) 0%, rgba(70, 71, 75, 0) 24%);
 }
@@ -198,7 +198,7 @@ h2.d-l, h2.d-m { margin-bottom: 1.1rem; }
 
 /* Faktenkacheln im Start-Hero */
 .fakten { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.6rem; }
-.fakt { padding: 1.1rem 1.2rem; border-radius: 12px; background: rgba(70, 71, 75, .55); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.fakt { padding: 1.1rem 1.2rem; border-radius: 12px; background: rgba(70, 71, 75, .88); border: 1px solid rgba(255, 255, 255, .16); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .fakt-kopf { display: flex; align-items: center; gap: .5rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gruen-hell); margin: 0 0 .45rem; }
 .fakt-kopf svg { width: 15px; height: 15px; }
 .fakt-wert { font-weight: 700; font-size: 1.15rem; letter-spacing: -.01em; line-height: 1.25; margin: 0 0 .2rem; }
@@ -419,3 +419,50 @@ h2.d-l, h2.d-m { margin-bottom: 1.1rem; }
 .hero-start .lead { max-width: 640px; }
 .hero-start h1 { font-size: clamp(2.5rem, 5.4vw, 4.6rem); }
 @media (min-width: 700px) { .zeile { display: block; } }
+
+/* ---------------------------------------------- Barrierefreiheit (Prüfung 07.10.2026) */
+/* 1.4.10 Umbruch: Raster dürfen bei 320 px nicht breiter werden als der Bildschirm */
+body { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word; }
+h1, h2, h3, .btn, .nav, .kopf { hyphens: manual; -webkit-hyphens: manual; }
+@media (max-width: 960px) { .gebiet, .vergleich, .bereiche, .leistungen { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) { .downloads { grid-template-columns: minmax(0, 1fr); } .download-fuss { flex-wrap: wrap; } }
+@media (max-width: 380px) {
+  .logo img { width: 124px; }
+  .kopf-innen { gap: .5rem; }
+  .login { padding: .5rem .65rem; gap: .35rem; }
+  .login .extern { display: none; }
+  .menue-knopf { width: 44px; height: 44px; }
+}
+/* 2.5.8 Zielgröße: Links mindestens 24 px hoch */
+.logo { padding-block: .4rem; }
+.fuss ul a, .brotkrumen a, .person .wege a, .fuss-adresse a { display: inline-block; padding-block: .2rem; }
+/* 1.4.3 Kontrast */
+.fuss .notiz { color: var(--grau-text); }
+.person[data-gebiet="huelsen"] .person-kuerzel { background: #6E6F73; }
+/* Text auf Fotos: auf schmalen Bildschirmen liegt der Text über dem ganzen Bild */
+@media (max-width: 700px) {
+  .hero::before { background: linear-gradient(180deg, rgba(70, 71, 75, .9) 0%, rgba(70, 71, 75, .86) 60%, rgba(70, 71, 75, .94) 100%); }
+}
+/* 2.3.3 Bewegung: Seitenübergänge abschalten, wenn reduzierte Bewegung gewünscht ist */
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+.pflicht { color: var(--gruen-text); }
+.formular-hinweis { grid-column: 1 / -1; font-size: .86rem; color: var(--tinte-2); margin: 0; }
+.hinweis-box { padding: 1rem 1.2rem; border-radius: var(--r); background: rgba(109, 188, 73, .16); border-left: 3px solid var(--gruen-text); color: var(--tinte) !important; }
+/* 1.4.3: Der Text der Startseite ist breiter, daher dunkelt das Foto dort weiter nach rechts ab */
+@media (min-width: 701px) {
+  .hero-start::before {
+    background:
+      linear-gradient(90deg, rgba(70, 71, 75, .97) 0%, rgba(70, 71, 75, .93) 55%, rgba(70, 71, 75, .6) 82%, rgba(70, 71, 75, .55) 100%),
+      linear-gradient(0deg, rgba(70, 71, 75, .92) 0%, rgba(70, 71, 75, 0) 40%),
+      linear-gradient(180deg, rgba(70, 71, 75, .6) 0%, rgba(70, 71, 75, 0) 24%);
+  }
+}
+@media (min-width: 701px) and (max-width: 1180px) {
+  .hero::before, .hero-start::before {
+    background:
+      linear-gradient(90deg, rgba(70, 71, 75, .96) 0%, rgba(70, 71, 75, .92) 65%, rgba(70, 71, 75, .7) 100%),
+      linear-gradient(0deg, rgba(70, 71, 75, .92) 0%, rgba(70, 71, 75, 0) 40%);
+  }
+}
+.hero .brotkrumen, .hero .eyebrow { width: fit-content; max-width: 100%; }
+.hero .lead, .hero .brotkrumen { color: var(--weiss); }
