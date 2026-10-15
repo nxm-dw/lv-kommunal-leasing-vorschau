@@ -478,3 +478,123 @@ h1, h2, h3, .btn, .nav, .kopf { hyphens: manual; -webkit-hyphens: manual; }
 /* Silbentrennung nur auf sehr schmalen Bildschirmen, damit Begriffe am Desktop ganz bleiben */
 body { hyphens: manual; -webkit-hyphens: manual; }
 @media (max-width: 480px) { body { hyphens: auto; -webkit-hyphens: auto; } h1, h2, h3, .btn, .nav { hyphens: manual; -webkit-hyphens: manual; } }
+
+/* ======================================================= Downloads mit Vorschau */
+.downloads { gap: 1.6rem; }
+.download { padding: 0; overflow: hidden; }
+.download-text { padding: clamp(1.4rem, 2.5vw, 1.9rem); display: flex; flex-direction: column; flex: 1; }
+.papier-buehne {
+  position: relative; display: grid; place-items: center; height: 300px; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 100%, #E7EAE4 0%, var(--raum) 60%); border-bottom: 1px solid var(--raum-2);
+}
+.papier { position: relative; display: block; width: 150px; transform: rotate(-4deg) translateY(6px); transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.papier-quer .papier { width: 230px; }
+/* zweites Blatt dahinter: alle Infoblätter haben zwei Seiten */
+.papier::before {
+  content: ""; position: absolute; inset: 0; background: var(--weiss); border-radius: 2px;
+  transform: rotate(7deg) translate(14px, 4px); box-shadow: 0 2px 4px rgba(38, 39, 42, .08), 0 14px 26px rgba(38, 39, 42, .12);
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+}
+.papier img {
+  position: relative; display: block; width: 100%; height: auto; border-radius: 2px; background: var(--weiss);
+  box-shadow: 0 1px 2px rgba(38, 39, 42, .12), 0 6px 10px rgba(38, 39, 42, .1), 0 22px 40px rgba(38, 39, 42, .18);
+}
+.download:hover .papier, .download:focus-within .papier { transform: rotate(0deg) translateY(-6px) scale(1.04); }
+.download:hover .papier::before, .download:focus-within .papier::before { transform: rotate(10deg) translate(26px, 8px); }
+@media (max-width: 760px) { .papier-buehne { height: 250px; } .papier { width: 125px; } .papier-quer .papier { width: 200px; } }
+
+/* ============================================================= Anfrage-Funnel */
+.funnel-raster { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 2.5rem clamp(2rem, 4vw, 3.5rem); align-items: start; }
+@media (max-width: 960px) { .funnel-raster { grid-template-columns: minmax(0, 1fr); } }
+.funnel { background: var(--weiss); border: 1px solid var(--raum-2); border-radius: var(--r-l); padding: clamp(1.4rem, 3.5vw, 2.6rem); box-shadow: var(--schatten); scroll-margin-top: calc(var(--kopf-h) + 1rem); }
+.funnel-kopf h2 { margin-bottom: 1.6rem; }
+.funnel-schritte { display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; margin-bottom: .8rem; }
+.funnel-schritte li { display: flex; align-items: center; gap: .5rem; font-size: .84rem; font-weight: 600; color: var(--tinte-2); }
+.fs-nr { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: .78rem; border: 2px solid var(--raum-2); background: var(--weiss); transition: background .2s, border-color .2s, color .2s; }
+.funnel-schritte li[data-status="aktiv"] { color: var(--tinte); }
+.funnel-schritte li[data-status="aktiv"] .fs-nr { border-color: var(--gruen); background: var(--gruen); color: var(--tinte); }
+.funnel-schritte li[data-status="fertig"] .fs-nr { border-color: var(--gruen-text); color: var(--gruen-text); }
+.funnel-schritte li[data-status="aus"] { opacity: .35; }
+@media (max-width: 700px) { .fs-name { display: none; } .funnel-schritte li { justify-content: center; } }
+.funnel-balken { height: 4px; border-radius: 2px; background: var(--raum-2); overflow: hidden; margin-bottom: 2rem; }
+.funnel-balken span { display: block; height: 100%; width: 0; background: var(--gruen); transition: width .4s cubic-bezier(.2, .7, .2, 1); }
+.no-js .funnel-schritte, .no-js .funnel-balken, .no-js #funnel-weiter, .no-js #funnel-zurueck { display: none; }
+
+.stufe { border: 0; margin: 0 0 2rem; padding: 0; min-width: 0; }
+.funnel-an .stufe { margin-bottom: 0; animation: stufe-rein .35s ease both; }
+@keyframes stufe-rein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.stufe legend { padding: 0; margin-bottom: 1.2rem; font-weight: 700; }
+.stufe legend:focus { outline: none; }
+.stufe-hinweis { font-size: .9rem; color: var(--tinte-2); margin: -.6rem 0 1rem; }
+.stufe-fehler { color: #B4262B; font-weight: 600; font-size: .92rem; margin: 1rem 0 0; }
+.variante-feld[hidden], [data-fuer-text][hidden] { display: none; }
+
+.kacheln { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.kacheln-drei { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) { .kacheln-drei { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .kacheln, .kacheln-drei { grid-template-columns: minmax(0, 1fr); } }
+.kw {
+  position: relative; display: flex; gap: .9rem; align-items: flex-start; padding: 1.05rem 1.1rem; border-radius: 12px;
+  border: 2px solid var(--raum-2); background: var(--weiss); cursor: pointer; transition: border-color .15s, background .15s, transform .15s;
+}
+.kacheln-drei .kw { flex-direction: column; gap: .6rem; }
+.kw:hover { border-color: #B9BDB6; transform: translateY(-1px); }
+.kw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.kw-ikon { flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: var(--raum); color: var(--gruen-text); transition: background .15s, color .15s; }
+.kw-ikon svg { width: 22px; height: 22px; }
+.kw-text { display: grid; gap: .15rem; }
+.kw-text strong { font-size: 1rem; line-height: 1.3; }
+.kw-text small { font-size: .86rem; color: var(--tinte-2); line-height: 1.4; }
+.kw:has(input:checked) { border-color: var(--gruen-text); background: #F4FAF0; }
+.kw:has(input:checked) .kw-ikon { background: var(--gruen); color: var(--tinte); }
+.kw:has(input:checked)::after {
+  content: ""; position: absolute; top: .7rem; right: .7rem; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gruen) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2326272A' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+.kw:has(input:focus-visible) { outline: 3px solid var(--gruen-text); outline-offset: 2px; }
+.kacheln-gross .kw { padding: 1.3rem 1.3rem; }
+
+.feld-gruppe { margin-bottom: 1.6rem; }
+.feld-titel { font-weight: 600; font-size: .95rem; margin: 0 0 .6rem; }
+.chip-wahl { display: flex; flex-wrap: wrap; gap: .5rem; }
+.cw { position: relative; cursor: pointer; }
+.cw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cw span { display: inline-block; padding: .6rem 1rem; border-radius: 999px; border: 2px solid var(--raum-2); font-size: .92rem; font-weight: 600; transition: border-color .15s, background .15s; }
+.cw:hover span { border-color: #B9BDB6; }
+.cw input:checked + span { border-color: var(--gruen-text); background: var(--gruen); }
+.cw input:focus-visible + span { outline: 3px solid var(--gruen-text); outline-offset: 2px; }
+
+.funnel .feld { margin-top: 1rem; }
+.funnel .feld label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: .35rem; }
+.funnel input:not([type="radio"]):not([type="checkbox"]), .funnel textarea { width: 100%; padding: .85rem 1rem; border-radius: var(--r); border: 1px solid #C9CDC6; background: var(--weiss); font-size: 1rem; }
+.funnel input:focus, .funnel textarea:focus { outline: none; border-color: var(--gruen-text); box-shadow: 0 0 0 3px rgba(109, 188, 73, .25); }
+.funnel input[aria-invalid="true"] { border-color: #B4262B; }
+.felder { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+@media (max-width: 600px) { .felder { grid-template-columns: minmax(0, 1fr); } }
+.zustaendig { margin: 1.9rem 0 0; padding: .75rem 1rem; border-radius: var(--r); background: var(--raum); font-size: .9rem; }
+@media (max-width: 600px) { .zustaendig { margin-top: .6rem; } }
+.funnel .formular-hinweis { margin-bottom: .2rem; }
+.funnel .notiz { margin-top: 1.2rem; }
+
+.funnel-nav { display: flex; justify-content: space-between; gap: .8rem; margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid var(--raum-2); }
+.funnel-nav #funnel-weiter, .funnel-nav #funnel-senden { margin-left: auto; }
+.no-js .funnel-nav { border: 0; }
+.funnel-fertig:focus { outline: none; }
+.funnel-fertig .personen { margin-top: 1.4rem; }
+.funnel-fertig .person { opacity: 1; }
+
+.funnel-seite { position: sticky; top: calc(var(--kopf-h) + 1.5rem); display: grid; gap: 1.4rem; }
+@media (max-width: 960px) { .funnel-seite { position: static; } }
+.angaben { padding: 1.4rem 1.5rem; border-radius: var(--r-l); background: var(--grau); color: var(--weiss); }
+.angaben .eyebrow { color: var(--gruen-hell); margin-bottom: .9rem; }
+.angaben dl { margin: 0; display: grid; gap: .55rem; }
+.angaben dl div { display: grid; gap: .05rem; padding-bottom: .55rem; border-bottom: 1px solid var(--grau-linie); }
+.angaben dl div:last-child { border-bottom: 0; padding-bottom: 0; }
+.angaben dt { font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--grau-text); }
+.angaben dd { margin: 0; font-weight: 600; }
+.funnel-seite .direkt { margin-top: 0; }
+.funnel-seite .adresse { margin-top: 0; }
+@media (prefers-reduced-motion: reduce) { .funnel-an .stufe { animation: none; } }
+/* Ausgeblendete Elemente bleiben ausgeblendet, auch wenn ihre Klasse display setzt */
+[hidden] { display: none !important; }
+@media (max-width: 480px) { .kacheln-drei .kw { flex-direction: row; gap: .9rem; } }
