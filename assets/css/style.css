@@ -466,3 +466,15 @@ h1, h2, h3, .btn, .nav, .kopf { hyphens: manual; -webkit-hyphens: manual; }
 }
 .hero .brotkrumen, .hero .eyebrow { width: fit-content; max-width: 100%; }
 .hero .lead, .hero .brotkrumen { color: var(--weiss); }
+
+/* Brotkrümel: alle Einträge auf einer Grundlinie, auch der aktuelle ohne Link */
+.brotkrumen { align-items: center; }
+.brotkrumen li { display: inline-flex; align-items: center; min-height: 24px; line-height: 1.4; }
+.brotkrumen li + li::before { margin-right: .5rem; }
+.brotkrumen a, .hero .brotkrumen a { display: inline; padding-block: 0; }
+/* Vergleich mit zwei Varianten */
+.vergleich.zwei-sp { grid-template-columns: repeat(2, 1fr); max-width: 900px; }
+@media (max-width: 760px) { .vergleich.zwei-sp { grid-template-columns: minmax(0, 1fr); } }
+/* Silbentrennung nur auf sehr schmalen Bildschirmen, damit Begriffe am Desktop ganz bleiben */
+body { hyphens: manual; -webkit-hyphens: manual; }
+@media (max-width: 480px) { body { hyphens: auto; -webkit-hyphens: auto; } h1, h2, h3, .btn, .nav { hyphens: manual; -webkit-hyphens: manual; } }
