@@ -654,3 +654,35 @@ body { hyphens: manual; -webkit-hyphens: manual; }
 .dl-karte:not(.dl-gross):hover .dl-papier { transform: translateY(3%); }
 .dl-text h2 { overflow-wrap: normal; }
 @media (max-width: 640px) { .dl-karte:not(.dl-gross) { grid-template-columns: minmax(0, 1fr); } .dl-karte:not(.dl-gross) .dl-papier { width: 52%; } }
+
+/* Funnel, Version 2: Auswahl als ruhige Liste, Inhalte einzeilig */
+.kacheln-liste { grid-template-columns: minmax(0, 1fr); gap: .6rem; }
+.kacheln-liste .kw { align-items: center; padding: .95rem 1.2rem; padding-right: 3.4rem; }
+.kacheln-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.kacheln-raster .kw { flex-direction: row; align-items: center; padding: .85rem 1rem; padding-right: 3rem; }
+.kacheln-liste .kw-text, .kacheln-raster .kw-text { min-width: 0; }
+@media (min-width: 640px) {
+  .kacheln-liste .kw-text strong, .kacheln-liste .kw-text small,
+  .kacheln-raster .kw-text strong, .kacheln-raster .kw-text small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+/* Auswahlkreis rechts, gefüllt mit Haken bei Auswahl */
+.kacheln-liste .kw::after, .kacheln-raster .kw::after {
+  content: ""; position: absolute; top: 50%; right: 1.1rem; width: 22px; height: 22px; margin-top: -11px;
+  border-radius: 50%; border: 2px solid #C9CDC6; background: var(--weiss);
+}
+.kacheln-raster .kw::after { border-radius: 6px; right: .9rem; }
+.kacheln-liste .kw:has(input:checked)::after, .kacheln-raster .kw:has(input:checked)::after {
+  top: 50%; border-color: var(--gruen);
+  background: var(--gruen) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2326272A' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat;
+}
+.kacheln-liste .kw-ikon, .kacheln-raster .kw-ikon { width: 40px; height: 40px; }
+.kacheln-liste .kw:not(:has(.kw-ikon)) { padding-left: 1.3rem; }
+@media (max-width: 480px) { .kacheln-raster { grid-template-columns: minmax(0, 1fr); } }
+.kw-text, .kw-text * { hyphens: manual; -webkit-hyphens: manual; }
+@media (max-width: 480px) { .kacheln-liste .kw-ikon { display: none; } .kacheln-liste .kw { padding-left: 1.1rem; } }
+@media (max-width: 480px) {
+  .kacheln-liste .kw { padding: .8rem 2.9rem .8rem 1rem; }
+  .kacheln-liste .kw::after { right: .85rem; width: 20px; height: 20px; margin-top: -10px; }
+  .kacheln-liste .kw-text strong { font-size: .97rem; }
+  .kacheln-liste .kw-text small { font-size: .84rem; }
+}
