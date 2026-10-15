@@ -598,3 +598,59 @@ body { hyphens: manual; -webkit-hyphens: manual; }
 /* Ausgeblendete Elemente bleiben ausgeblendet, auch wenn ihre Klasse display setzt */
 [hidden] { display: none !important; }
 @media (max-width: 480px) { .kacheln-drei .kw { flex-direction: row; gap: .9rem; } }
+
+/* ============================================ Downloads als Querkarten (Version 2) */
+.dl-raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+.dl-karte {
+  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); min-height: 300px;
+  background: var(--weiss); border: 1px solid var(--raum-2); border-radius: var(--r-l); overflow: hidden;
+  text-decoration: none; color: inherit; transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.dl-karte:hover { border-color: #C5CAC1; box-shadow: 0 2px 4px rgba(38, 39, 42, .05), 0 18px 40px rgba(38, 39, 42, .1); transform: translateY(-2px); }
+.dl-karte:focus-visible { outline: 3px solid var(--gruen-text); outline-offset: 3px; }
+.dl-gross { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); min-height: 340px; }
+
+/* Bildfeld in Logo-Grau, das Infoblatt ragt von unten heraus */
+.dl-bild {
+  position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden;
+  padding: 2.2rem 1.5rem 0;
+  background: radial-gradient(90% 70% at 50% 0%, #6A6B70 0%, var(--grau) 60%, var(--grau-tief) 100%);
+}
+.dl-papier { position: relative; display: block; width: 68%; max-width: 230px; transform: translateY(14%); transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+.dl-gross .dl-papier { width: 82%; max-width: 520px; transform: translateY(16%); }
+/* zweites Blatt dahinter, gerade versetzt: alle Infoblätter haben zwei Seiten */
+.dl-papier::before {
+  content: ""; position: absolute; inset: 0; border-radius: 2px; background: #E9EBE7;
+  transform: translate(10px, -10px); box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+.dl-papier img {
+  position: relative; display: block; width: 100%; height: auto; border-radius: 2px; background: var(--weiss);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 10px 18px rgba(0, 0, 0, .22), 0 30px 60px rgba(0, 0, 0, .3);
+}
+.dl-karte:hover .dl-papier, .dl-karte:focus-visible .dl-papier { transform: translateY(6%); }
+
+.dl-text { display: flex; flex-direction: column; gap: .55rem; padding: clamp(1.4rem, 2.6vw, 2rem); }
+.dl-text .eyebrow { margin-bottom: .2rem; }
+.dl-text h2 { font-size: clamp(1.2rem, 1.7vw, 1.45rem); letter-spacing: -.015em; line-height: 1.2; }
+.dl-gross .dl-text h2 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
+.dl-beschr { color: var(--tinte-2); font-size: .97rem; line-height: 1.6; }
+.dl-meta { margin-top: auto; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; gap: .6rem 1rem; flex-wrap: wrap; }
+.dl-knopf { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; color: var(--gruen-text); }
+.dl-knopf svg { width: 20px; height: 20px; transition: transform .2s; }
+.dl-karte:hover .dl-knopf { text-decoration: underline; text-underline-offset: .2em; }
+.dl-karte:hover .dl-knopf svg { transform: translateY(2px); }
+.dl-meta small { font-family: var(--mono); font-size: .74rem; color: var(--tinte-2); }
+
+@media (max-width: 1040px) { .dl-raster { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) {
+  .dl-karte, .dl-gross { grid-template-columns: minmax(0, 1fr); }
+  .dl-bild { min-height: 230px; padding-top: 1.8rem; }
+  .dl-papier { width: 46%; }
+  .dl-gross .dl-papier { width: 84%; }
+}
+@media (prefers-reduced-motion: reduce) { .dl-papier, .dl-karte { transition: none; } }
+.dl-karte:not(.dl-gross) { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+.dl-karte:not(.dl-gross) .dl-papier { width: 80%; max-width: 250px; transform: translateY(10%); }
+.dl-karte:not(.dl-gross):hover .dl-papier { transform: translateY(3%); }
+.dl-text h2 { overflow-wrap: normal; }
+@media (max-width: 640px) { .dl-karte:not(.dl-gross) { grid-template-columns: minmax(0, 1fr); } .dl-karte:not(.dl-gross) .dl-papier { width: 52%; } }
